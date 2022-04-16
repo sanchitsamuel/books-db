@@ -1,24 +1,103 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### Create a REST API using RoR MVC and write a method to return a sorted list of these by Publisher, Author (last, first), then title.
 
-Things you may want to cover:
+```
+curl --location --request GET 'http://localhost:3000/api/books?order=publisher'
+```
 
-* Ruby version
+### Write another API method to return a sorted list by Author (last, first) then title.
 
-* System dependencies
+```
+curl --location --request GET 'http://localhost:3000/api/books?order=author'
+```
 
-* Configuration
+### If you had to create one or more tables to store the Book data in a PostGre database, outline the table design along with fields and their datatypes.
 
-* Database creation
+A suggestive approach can be, having the tables mentioned below.
 
-* Database initialization
+Author has a `many to many` relationship to Publisher.
 
-* How to run the test suite
+Publisher has a `many to many` relationship to with Book.
 
-* Services (job queues, cache servers, search engines, etc.)
+Book `has many` BookEditions
 
-* Deployment instructions
 
-* ...
+#### Tables
+
+```
+Author
+  - last_name
+  - first_name
+
+AuthorPublisherMapping
+  - author_id
+  - publisher_id
+
+Publisher
+  - name
+
+PublisherBookMapping
+  - publisher_id
+  - book_id
+
+Book
+  - publisher_id
+  - title
+  - isbn
+
+BookEdition
+  - book_id
+  - release_date
+  - revision
+  - issue
+
+```
+
+
+### Write stored procedures for steps 1 and 2, and use them in separate API methods to return the same results.
+
+
+### Write an API method to return the total price of all books in the database.
+
+```
+curl --location --request GET 'http://localhost:3000/api/books/total_price'
+```
+
+
+### If you have a large list of these in memory and want to save the entire list to the database, with only one call to the DB server.
+
+```
+curl --location --request POST 'http://localhost:3000/api/books/create_list' \
+--header 'Content-Type: application/json' 
+--data-raw '{
+    "books": [
+        {
+            "publisher": "Publisher name one",
+            "title": "Title 1",
+            "author_last_name": "last name 1",
+            "author_first_name": "first name 1",
+            "price": 20.5
+        },
+        {
+            "publisher": "Publisher name two",
+            "title": "Title 2",
+            "author_last_name": "last name 2",
+            "author_first_name": "first name 2",
+            "price": 40.5
+        },
+        {
+            "publisher": "Publisher name two",
+            "title": "Title 2",
+            "author_last_name": "last name 2",
+            "author_first_name": "first name 2",
+            "price": 40.5
+        }
+    ]
+}'
+```
+
+### Add a property to the Book class that outputs the MLA (Modern Language Association) style citation as a string (https://images.app.goo.gl/YkFgbSGiPmie9GgWA). Please add whatever additional properties the Book class needs to generate the citation.
+
+
+### Add another property to generate a Chicago style citation (Chicago Manual of Style) (https://images.app.goo.gl/w3SRpg2ZFsXewdAj7).

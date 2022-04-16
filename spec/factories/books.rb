@@ -5,5 +5,7 @@ FactoryBot.define do
     title { Faker::Book.title }
     price { rand(1.0..1000.0).round(2) }
     publisher { Faker::Company.name }
+    editor_name { Faker::Name.name }
+    title_collection { Faker::Book.title }
   end
 end
