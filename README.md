@@ -1,5 +1,28 @@
 # README
 
+## Getting Started
+
+#### Using
+  - ruby 3.0.1p64
+  - Rails 6.1.5
+
+```
+# install dependencies
+bundle
+
+# set up DB
+rails db:create
+rails db:migrate
+rails db:seed
+
+# run tests
+bundle exec rspec
+
+# start server
+rails s
+```
+
+
 ### Create a REST API using RoR MVC and write a method to return a sorted list of these by Publisher, Author (last, first), then title.
 
 ```
@@ -56,6 +79,21 @@ BookEdition
 
 
 ### Write stored procedures for steps 1 and 2, and use them in separate API methods to return the same results.
+
+Stored procedures in PostGre don't return data. This is a different behaviour from MySQL.
+
+I have created to functions which execute the select query on the `books` table.
+
+Migration is present in the code.
+
+
+```
+curl --location --request GET 'http://localhost:3000/api/books/psql_function?order=publisher'
+```
+
+```
+curl --location --request GET 'http://localhost:3000/api/books/psql_function?order=author'
+```
 
 
 ### Write an API method to return the total price of all books in the database.
