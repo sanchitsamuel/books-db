@@ -146,7 +146,5 @@ Book.first.cite_mla 2004, 23
 ### Add another property to generate a Chicago style citation (Chicago Manual of Style) (https://images.app.goo.gl/w3SRpg2ZFsXewdAj7).
 
 ```
-```
 Book.first.chicago_style_citation
-```
 ```
