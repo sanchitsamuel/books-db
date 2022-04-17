@@ -100,4 +100,15 @@ curl --location --request POST 'http://localhost:3000/api/books/create_list' \
 ### Add a property to the Book class that outputs the MLA (Modern Language Association) style citation as a string (https://images.app.goo.gl/YkFgbSGiPmie9GgWA). Please add whatever additional properties the Book class needs to generate the citation.
 
 
+```
+Book.first.cite_mla 2004, 23
+```
+
+
 ### Add another property to generate a Chicago style citation (Chicago Manual of Style) (https://images.app.goo.gl/w3SRpg2ZFsXewdAj7).
+
+```
+```
+Book.first.chicago_style_citation
+```
+```

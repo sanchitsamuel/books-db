@@ -9,7 +9,7 @@ class Book < ApplicationRecord
     "#{author_last_name}, #{author_first_name}. '#{title}' #{title_collection}, edited by #{editor_name}, #{publisher} #{year}, p. #{page}."
   end
 
-  def chicago_style_citation
-    "#{title}, no. vol (Issue no): page-range. https://doi.org/10.xxxx/xxxxx."
+  def chicago_style_citation(page_range)
+    "#{title}, no. #{volumn} (#{issue.strftime('%B %Y')}): #{page_range}. https://doi.org/10.xxxx/xxxxx."
   end
 end
