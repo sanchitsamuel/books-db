@@ -9,6 +9,15 @@ class Api::BooksController < ActionController::API
     render json: @books, status: :ok
   end
 
+  def psql_function
+    if params[:order] == 'publisher' || params[:order].nil?
+      r = ActiveRecord::Base.connection.execute 'select * from books_ordered_by_publisher();'
+    elsif params[:order] == 'author'
+      r = ActiveRecord::Base.connection.execute 'select * from books_ordered_by_author();'
+    end
+    render json: r.to_a, status: :ok
+  end
+
   def create_list
     @books = Book.create(books_list_params[:books])
     render json: { success: true, message: "#{@books.count} Books created successfully" }, status: :created
